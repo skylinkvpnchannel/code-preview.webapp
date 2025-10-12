@@ -465,7 +465,7 @@
                 const port = 31990;
                 const encodedAuth = 'Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo1Ly8vQ0VGTGx3bEhIMGxobG9rbUFRYU4vZHpzeGJpVnJmYTE4UzEweVZ3PQ';
                 
-                vpnKey = `ss://${encodedAuth}@${server}:${port}?type=tcp#SkylinkFree-💝${username}💝-${currentDate}`;
+                vpnKey = `ss://${encodedAuth}@${server}:${port}?type=tcp#💝SkylinkFree-$💝{username}💝-$💝{currentDate}`;
             } else {
                 // Starlink VLESS configuration
                 const uuid = generateUUID();
@@ -474,7 +474,7 @@
                 const path = '/skylink';
                 const host = 'portal-as.ruijienetworks.com';
                 
-                vpnKey = `vless://${uuid}@${server}:${port}/?type=ws&path=${encodeURIComponent(path)}&host=${host}&security=none#StarlinkFree-💝${username}💝-${currentDate}`;
+                vpnKey = `vless://${uuid}@${server}:${port}/?type=ws&path=${encodeURIComponent(path)}&host=${host}&security=none#💝StarlinkFree-$💝{username}💝-$💝{currentDate}`;
             }
             
             setTimeout(() => {
