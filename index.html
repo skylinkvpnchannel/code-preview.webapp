@@ -461,17 +461,17 @@
 
             if (selectedVPNType === 'shadowsocks') {
                 // Shadowsocks configuration
-                const server = '13.228.144.120';
-                const port = 31990;
-                const encodedAuth = 'Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo1Ly8vQ0VGTGx3bEhIMGxobG9rbUFRYU4vZHpzeGJpVnJmYTE4UzEweVZ3PQ';
+                const server = '159.223.66.202';
+                const port = 36847;
+                const encodedAuth = 'Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTpBQTF4d1JENVNwOExvTEwydVZFUFhoNlRYYXM1WnRzbzd0UVo4VVVUYmxvPQ';
                 
                 vpnKey = `ss://${encodedAuth}@${server}:${port}?type=tcp#💝SkylinkFree-💝${username}-💝${currentDate}`;
             } else {
                 // Starlink VLESS configuration
-                const uuid = '286bf190-3a90-4de9-85b0-da061b2c9baa';
+                const uuid = '8343c85d-0193-47fe-836d-53db4e38d726';
                 const server = '13.228.144.120';
                 const port = 8080;
-                const path = '/skylink';
+                const path = '/skylinkvpnchannel';
                 const host = 'portal-as.ruijienetworks.com';
                 
                 vpnKey = `vless://${uuid}@${server}:${port}/?type=ws&path=${encodeURIComponent(path)}&host=${host}&security=none#💝StarlinkFree-💝${username}-💝${currentDate}`;
