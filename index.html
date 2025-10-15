@@ -35,20 +35,20 @@ input[type="text"],input[type="password"],textarea{user-select:text;}
 <body class="min-h-screen flex items-center justify-center relative overflow-x-hidden">
 
 <!-- Login Overlay -->
-<div id="loginOverlay" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 sm:p-0">
-    <div class="glass w-full max-w-xs sm:max-w-sm p-5 sm:p-8 rounded-3xl text-center shadow-xl">
+<div id="loginOverlay" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-2 sm:p-0 overflow-auto">
+    <div class="glass w-full max-w-xs sm:max-w-sm p-5 sm:p-8 rounded-3xl text-center shadow-xl mx-2">
         <!-- Title -->
-        <h2 class="text-lg sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-800">
+        <h2 class="text-lg sm:text-2xl font-bold mb-3 sm:mb-5 text-gray-800">
             🔒 Login ဝင်ရောက်ရန်
         </h2>
 
         <!-- Username -->
         <input type="text" id="loginUsername" placeholder="Username" 
-               class="w-full glass-input rounded-2xl p-3 mb-3 sm:mb-4 focus:ring-2 focus:ring-blue-300 text-sm sm:text-base">
+               class="w-full glass-input rounded-2xl p-3 mb-2 sm:mb-4 focus:ring-2 focus:ring-blue-300 text-sm sm:text-base">
 
         <!-- Password -->
         <input type="password" id="loginPassword" placeholder="Password" 
-               class="w-full glass-input rounded-2xl p-3 mb-4 sm:mb-6 focus:ring-2 focus:ring-blue-300 text-sm sm:text-base">
+               class="w-full glass-input rounded-2xl p-3 mb-3 sm:mb-5 focus:ring-2 focus:ring-blue-300 text-sm sm:text-base">
 
         <!-- Login Button -->
         <button id="loginBtn" 
@@ -57,8 +57,8 @@ input[type="text"],input[type="password"],textarea{user-select:text;}
         </button>
 
         <!-- Admin Note -->
-        <p class="text-xs sm:text-sm text-gray-700 mb-2 sm:mb-4 text-center">
-          📞  Admin ဆီ ဆက်သွယ်ရန်
+        <p class="text-xs sm:text-sm text-gray-700 mb-2 sm:mb-3 text-center">
+            Admin ဆီ ဆက်သွယ်ရန်
         </p>
 
         <!-- Error -->
@@ -67,7 +67,6 @@ input[type="text"],input[type="password"],textarea{user-select:text;}
         </p>
     </div>
 </div>
-
 
 
 
