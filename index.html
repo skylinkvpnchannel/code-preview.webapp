@@ -166,11 +166,13 @@ input[type="text"],input[type="password"],textarea{user-select:text;}
     document.addEventListener('keydown', e=>{
         if(e.key==='F12' || (e.ctrlKey&&e.shiftKey&&(e.key==='I'||e.key==='J')) || (e.ctrlKey&&(e.key==='U'||e.key==='S'||e.key==='P'))){ e.preventDefault(); return false; }
     });
-    setInterval(()=>{
-        if(window.outerHeight - window.innerHeight>200 || window.outerWidth - window.innerWidth>200){
-            document.body.innerHTML='<div class="flex items-center justify-center h-screen text-red-600 text-2xl font-bold">⚠️ Developer Tools Detected!</div>';
-        }
-    },500);
+    setInterval(() => {
+    const isDesktop = window.innerWidth > 768; // tablet/desktop only
+    if(!isDesktop) return;
+    if(window.outerHeight - window.innerHeight > 200 || window.outerWidth - window.innerWidth > 200){
+        document.body.innerHTML = '<div class="flex items-center justify-center h-screen text-red-600 text-2xl font-bold">⚠️ Developer Tools Detected!</div>';
+    }
+}, 500);
 </script>
 </body>
 </html>
