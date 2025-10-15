@@ -116,42 +116,93 @@ input[type="text"],input[type="password"],textarea{user-select:text;}
 
 
 <!-- Main VPN Generator -->
-<div id="mainContent" class="min-h-full flex flex-col items-center justify-center container-responsive relative z-10 hidden w-full p-4">
-    <div class="glass card-responsive rounded-3xl shadow-2xl w-full max-w-2xl mx-auto pulse-glow p-6 space-y-5">
-        <div class="text-center mb-6">
-            <div class="text-6xl mb-4 floating">🚀</div>
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">VPN Key Generator</h1>
-            <p class="text-gray-600 font-medium text-sm md:text-base">Skylinkvpnchannel မှ ဖန်တီးထားသည် ။</p>
+<div id="mainContent" class="min-h-screen flex flex-col items-center justify-center container-responsive relative z-10 hidden w-full p-4">
+    <div class="glass card-responsive rounded-3xl shadow-2xl w-full max-w-md sm:max-w-2xl mx-auto pulse-glow p-4 sm:p-6 md:p-8 space-y-5 overflow-hidden">
+        <!-- Header -->
+        <div class="text-center mb-4 sm:mb-6">
+            <div class="text-5xl sm:text-6xl mb-3 floating">🚀</div>
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-800 mb-1">VPN Key Generator</h1>
+            <p class="text-gray-600 font-medium text-xs sm:text-sm md:text-base">Skylinkvpnchannel မှ ဖန်တီးထားသည် ။</p>
         </div>
 
-        <div class="flex justify-end mb-4">
-            <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-xl btn-hover">Logout</button>
+        <!-- Logout -->
+        <div class="flex justify-end">
+            <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white font-bold px-4 py-2 rounded-xl btn-hover text-sm sm:text-base">Logout</button>
         </div>
 
-        <div class="space-y-5 w-full">
-            <div class="space-y-3">
-                <label class="block text-sm md:text-base font-semibold text-gray-700">👤 Username (နာမည်):</label>
-                <input type="text" id="username" placeholder="သင့်နာမည် ထည့်ပါ..." class="w-full glass-input rounded-2xl p-3 md:p-4 text-sm md:text-base">
+        <!-- Form -->
+        <div class="space-y-4 sm:space-y-5 w-full">
+            <div class="space-y-2 sm:space-y-3">
+                <label class="block text-sm sm:text-base font-semibold text-gray-700">👤 Username (နာမည်):</label>
+                <input type="text" id="username" placeholder="သင့်နာမည် ထည့်ပါ..." 
+                       class="w-full glass-input rounded-2xl p-2.5 sm:p-3 md:p-4 text-sm sm:text-base transition-all duration-300 shadow-inner">
             </div>
 
-            <div class="space-y-3">
-                <label class="block text-sm md:text-base font-semibold text-gray-700">🌐 VPN Type (အမျိုးအစား):</label>
-                <div class="grid grid-cols-2 gap-3">
-                    <button id="shadowsocksBtn" class="vpn-type-btn active font-bold p-3 md:p-4 rounded-2xl btn-hover">⚡ Shadowsocks</button>
-                    <button id="starlinkBtn" class="vpn-type-btn font-bold p-3 md:p-4 rounded-2xl btn-hover">🛰️ Starlink</button>
+            <div class="space-y-2 sm:space-y-3">
+                <label class="block text-sm sm:text-base font-semibold text-gray-700">🌐 VPN Type (အမျိုးအစား):</label>
+                <div class="grid grid-cols-2 gap-2 sm:gap-3">
+                    <button id="shadowsocksBtn" class="vpn-type-btn active font-bold p-2.5 sm:p-3 md:p-4 rounded-2xl btn-hover text-sm sm:text-base">⚡ Shadowsocks</button>
+                    <button id="starlinkBtn" class="vpn-type-btn font-bold p-2.5 sm:p-3 md:p-4 rounded-2xl btn-hover text-sm sm:text-base">🛰️ Starlink</button>
                 </div>
             </div>
 
-            <button id="generateBtn" class="w-full bg-gradient-button font-bold p-3 md:p-4 rounded-2xl btn-hover">🚀 VPN Key ဖန်တီးပါ</button>
+            <button id="generateBtn" class="w-full bg-gradient-button font-bold p-2.5 sm:p-3 md:p-4 rounded-2xl btn-hover text-sm sm:text-base">🚀 VPN Key ဖန်တီးပါ</button>
 
-            <div id="keyContainer" class="hidden fade-in space-y-4">
-                <textarea id="generatedKey" readonly rows="3" class="w-full p-3 md:p-4 bg-gray-50 border-2 border-gray-200 rounded-xl font-mono text-xs md:text-sm text-center resize-none"></textarea>
-                <button id="copyBtn" class="w-full bg-gradient-success font-bold p-3 md:p-4 rounded-2xl btn-hover">📋 Copy Key</button>
-                <div id="copyMessage" class="hidden text-center text-green-600 font-semibold">✅ VPN Key ကို copy လုပ်ပြီးပါပြီ!</div>
+            <!-- Generated Key -->
+            <div id="keyContainer" class="hidden fade-in space-y-3 sm:space-y-4">
+                <textarea id="generatedKey" readonly rows="3" class="w-full p-2.5 sm:p-3 md:p-4 bg-gray-50 border-2 border-gray-200 rounded-xl font-mono text-xs sm:text-sm md:text-base text-center resize-none"></textarea>
+                <button id="copyBtn" class="w-full bg-gradient-success font-bold p-2.5 sm:p-3 md:p-4 rounded-2xl btn-hover text-sm sm:text-base">📋 Copy Key</button>
+                <div id="copyMessage" class="hidden text-center text-green-600 font-semibold text-sm sm:text-base">✅ VPN Key ကို copy လုပ်ပြီးပါပြီ!</div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    /* Floating animation */
+    @keyframes floating {
+        0%,100% { transform: translateY(0px) rotate(0deg); }
+        25% { transform: translateY(-6px) rotate(1deg); }
+        50% { transform: translateY(-12px) rotate(0deg); }
+        75% { transform: translateY(-6px) rotate(-1deg); }
+    }
+    .floating { animation: floating 6s ease-in-out infinite; }
+
+    /* Glass input */
+    .glass-input {
+        background: rgba(255,255,255,0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    /* Glass container */
+    .glass {
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255,255,255,0.3);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    /* Button hover effect */
+    .btn-hover:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+    .btn-hover:active {
+        transform: translateY(0px);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+
+    /* Gradient buttons */
+    .bg-gradient-button { background: linear-gradient(135deg,#667eea 0%,#764ba2 100%); color:white; }
+    .bg-gradient-success { background: linear-gradient(135deg,#4facfe 0%,#00f2fe 100%); color:white; }
+
+    /* Responsive spacing for mobile scroll fix */
+    .card-responsive { max-height: 90vh; overflow-y: auto; }
+</style>
+
 
 <script>
     // --- Login System ---
