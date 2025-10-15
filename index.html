@@ -35,24 +35,28 @@ input[type="text"],input[type="password"],textarea{user-select:text;}
 <body class="min-h-screen flex items-center justify-center relative overflow-x-hidden">
 
 <!-- Login Overlay -->
-<div id="loginOverlay" class="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-2 sm:p-0 overflow-auto">
-    <div class="glass w-full max-w-xs sm:max-w-sm p-5 sm:p-8 rounded-3xl text-center shadow-xl mx-2">
+<div id="loginOverlay" class="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-2 sm:p-0 overflow-auto">
+    <div class="glass relative w-full max-w-xs sm:max-w-sm p-5 sm:p-8 rounded-3xl text-center shadow-xl mx-2">
+        <!-- Decorative Circles -->
+        <div class="absolute -top-8 -left-8 w-16 h-16 bg-gradient-to-tr from-purple-400 via-pink-500 to-red-400 rounded-full opacity-30 animate-floating"></div>
+        <div class="absolute -bottom-6 -right-6 w-20 h-20 bg-gradient-to-tr from-blue-400 via-teal-400 to-green-400 rounded-full opacity-20 animate-floating" style="animation-delay: 1s;"></div>
+
         <!-- Title -->
-        <h2 class="text-lg sm:text-2xl font-bold mb-3 sm:mb-5 text-gray-800">
+        <h2 class="text-lg sm:text-2xl font-bold mb-4 sm:mb-6 text-gray-800 drop-shadow-sm">
             🔒 Login ဝင်ရောက်ရန်
         </h2>
 
         <!-- Username -->
         <input type="text" id="loginUsername" placeholder="Username" 
-               class="w-full glass-input rounded-2xl p-3 mb-2 sm:mb-4 focus:ring-2 focus:ring-blue-300 text-sm sm:text-base">
+               class="w-full glass-input rounded-2xl p-3 mb-3 sm:mb-4 focus:ring-2 focus:ring-blue-300 text-sm sm:text-base transition-all duration-300 shadow-inner">
 
         <!-- Password -->
         <input type="password" id="loginPassword" placeholder="Password" 
-               class="w-full glass-input rounded-2xl p-3 mb-3 sm:mb-5 focus:ring-2 focus:ring-blue-300 text-sm sm:text-base">
+               class="w-full glass-input rounded-2xl p-3 mb-4 sm:mb-5 focus:ring-2 focus:ring-blue-300 text-sm sm:text-base transition-all duration-300 shadow-inner">
 
         <!-- Login Button -->
         <button id="loginBtn" 
-                class="w-full bg-gradient-button font-bold p-3 sm:p-3.5 rounded-2xl btn-hover glass-button text-sm sm:text-base mb-2 sm:mb-3">
+                class="w-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white font-bold p-3 sm:p-3.5 rounded-2xl btn-hover glass-button text-sm sm:text-base mb-3 shadow-lg hover:shadow-2xl transition-all duration-300">
             Login
         </button>
 
@@ -67,6 +71,47 @@ input[type="text"],input[type="password"],textarea{user-select:text;}
         </p>
     </div>
 </div>
+
+<style>
+    /* Floating animation for decorative circles */
+    @keyframes floating {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        25% { transform: translateY(-6px) rotate(1deg); }
+        50% { transform: translateY(-12px) rotate(0deg); }
+        75% { transform: translateY(-6px) rotate(-1deg); }
+    }
+    .animate-floating {
+        animation: floating 6s ease-in-out infinite;
+    }
+
+    /* Glass input */
+    .glass-input {
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* Glass container */
+    .glass {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Button hover effect */
+    .btn-hover:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+    .btn-hover:active {
+        transform: translateY(0px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
 
 
 
