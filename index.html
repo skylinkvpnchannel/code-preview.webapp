@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Exit HTML Playground</title>
+  <title>HTML Playground by Exit</title>
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/5968/5968267.png">
   <style>
     body {
@@ -24,7 +24,6 @@
       font-size: 20px;
       font-weight: bold;
       border-bottom: 1px solid #30363d;
-      letter-spacing: 0.5px;
     }
 
     /* Toolbar */
@@ -46,38 +45,62 @@
       border-radius: 4px;
       cursor: pointer;
     }
+
     button:hover, select:hover {
       background: #58a6ff;
       color: #000;
     }
 
-    /* Main Layout */
+    /* Layout */
     .container {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
       flex-grow: 1;
       height: 100%;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       .container {
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr;
+        grid-template-rows: auto auto auto;
       }
     }
 
-    .editor, iframe {
+    .box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .box h3 {
+      margin: 0;
+      padding: 8px;
+      background: #21262d;
+      border-bottom: 1px solid #30363d;
+      color: #58a6ff;
+      text-align: center;
+    }
+
+    .editor, textarea, iframe {
+      flex-grow: 1;
       background: #161b22;
-      border: none;
-      width: 100%;
-      height: 100%;
       color: #c9d1d9;
+      border: none;
       padding: 10px;
       box-sizing: border-box;
+      resize: none;
+      font-size: 14px;
+      outline: none;
+      width: 100%;
     }
 
     .editor {
-      outline: none;
+      overflow-y: auto;
+    }
+
+    .code-box {
+      background: #0f141a;
+      font-family: monospace;
+      white-space: pre-wrap;
       overflow-y: auto;
     }
 
@@ -96,9 +119,9 @@
   </style>
 </head>
 <body>
-  <header>🧩 Exit HTML Playground — Web Editor Tool</header>
+  <header>🧩 HTML Playground Tool by Exit</header>
 
-  <!-- 🛠️ Toolbar -->
+  <!-- Toolbar -->
   <div class="toolbar">
     <button onclick="execCmd('bold')"><b>B</b></button>
     <button onclick="execCmd('italic')"><i>I</i></button>
@@ -114,46 +137,63 @@
     <button onclick="execCmd('justifyCenter')">↔ Center</button>
     <button onclick="execCmd('justifyRight')">➡ Right</button>
     <button onclick="execCmd('insertUnorderedList')">• List</button>
-    <button onclick="updateOutput()">🔄 Preview</button>
+    <button onclick="updateAll()">🔄 Refresh</button>
   </div>
 
-  <!-- 🧩 Main Section -->
+  <!-- Main -->
   <div class="container">
-    <div id="editor" class="editor" contenteditable="true">
-      <h2>Welcome to Exit’s HTML Playground 👋</h2>
-      <p>Type here and style text with the toolbar above.</p>
-      <ul><li>Change color 🎨</li><li>Resize font 🔠</li><li>Align text ➡</li></ul>
+    <!-- Editor -->
+    <div class="box">
+      <h3>📝 Editor (Use Toolbar)</h3>
+      <div id="editor" class="editor" contenteditable="true">
+        <h2>Welcome to Exit’s HTML Playground 👋</h2>
+        <p>Type something here and style it with the toolbar.</p>
+      </div>
     </div>
-    <iframe id="output"></iframe>
+
+    <!-- HTML + CSS -->
+    <div class="box">
+      <h3>💻 HTML & 🎨 CSS</h3>
+      <pre id="htmlCode" class="code-box"></pre>
+      <textarea id="cssCode" placeholder="Write CSS here...">p {color: #58a6ff;}</textarea>
+    </div>
+
+    <!-- Output -->
+    <div class="box">
+      <h3>🔍 Output</h3>
+      <iframe id="output"></iframe>
+    </div>
   </div>
 
-  <footer>
-    © 2025 Exit | Built with ❤️ | Hosted on GitHub Pages
-  </footer>
+  <footer>© 2025 Exit — Built with ❤️ | Hosted on GitHub Pages</footer>
 
   <script>
     function execCmd(command, value = null) {
       document.execCommand(command, false, value);
+      updateAll();
     }
 
-    function updateOutput() {
-      const html = document.getElementById('editor').innerHTML;
-      document.getElementById('output').srcdoc = `
+    const editor = document.getElementById('editor');
+    const htmlCode = document.getElementById('htmlCode');
+    const cssCode = document.getElementById('cssCode');
+    const output = document.getElementById('output');
+
+    function updateAll() {
+      const html = editor.innerHTML;
+      const css = `<style>${cssCode.value}</style>`;
+      htmlCode.textContent = html;
+      output.srcdoc = `
         <style>
-          body {
-            background: #1a1f25;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            padding: 20px;
-          }
+          body {background:#1a1f25; color:white; font-family:Arial; padding:20px;}
         </style>
+        ${css}
         ${html}
       `;
     }
 
-    // Auto preview when typing
-    document.getElementById('editor').addEventListener('input', updateOutput);
-    updateOutput();
+    editor.addEventListener('input', updateAll);
+    cssCode.addEventListener('input', updateAll);
+    updateAll();
   </script>
 </body>
 </html>
