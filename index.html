@@ -50,6 +50,14 @@
       color: #000;
     }
 
+    input[type="color"] {
+      width: 42px;
+      height: 34px;
+      padding: 2px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
     .container {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -152,12 +160,12 @@
       <option value="4">Medium</option>
       <option value="6">Large</option>
     </select>
-    <input type="color" onchange="execCmd('foreColor', this.value)">
+    <input type="color" id="colorTool" title="Text color" onchange="execCmd('foreColor', this.value)">
     <button onclick="execCmd('justifyLeft')">⬅ Left</button>
     <button onclick="execCmd('justifyCenter')">↔ Center</button>
     <button onclick="execCmd('justifyRight')">➡ Right</button>
     <button onclick="execCmd('insertUnorderedList')">• List</button>
-    <button onclick="updateAll()">🔄 Refresh</button>
+    <button id="refreshBtn">🔄 Refresh</button>
   </div>
 
   <div class="container">
@@ -190,6 +198,7 @@
     const htmlBox = document.getElementById('htmlBox');
     const cssBox = document.getElementById('cssBox');
     const output = document.getElementById('output');
+    const refreshBtn = document.getElementById('refreshBtn');
 
     function execCmd(command, value = null) {
       document.execCommand(command, false, value);
@@ -215,6 +224,13 @@
     });
     editor.addEventListener('input', updateAll);
     cssBox.addEventListener('input', updateAll);
+
+    // 🔄 Fix Refresh button
+    refreshBtn.addEventListener('click', () => {
+      editor.innerHTML = htmlBox.value || editor.innerHTML;
+      updateAll();
+    });
+
     updateAll();
   </script>
 </body>
