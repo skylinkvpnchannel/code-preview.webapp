@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HTML & CSS Playground</title>
+  <title>4 Column Playground</title>
   <style>
     body {
       margin: 0;
-      background-color: #0d1117;
+      background: #0d1117;
       color: #fff;
       font-family: monospace;
       display: flex;
@@ -16,26 +16,19 @@
     }
 
     header {
+      text-align: center;
       background: #161b22;
       color: #58a6ff;
       padding: 10px;
-      text-align: center;
+      border-bottom: 1px solid #30363d;
       font-weight: bold;
       font-size: 20px;
-      border-bottom: 1px solid #30363d;
     }
 
-    .top {
+    .container {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      height: 45%;
-      border-bottom: 1px solid #30363d;
-    }
-
-    .bottom {
-      height: 55%;
-      display: flex;
-      flex-direction: column;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      flex-grow: 1;
     }
 
     .box {
@@ -50,75 +43,113 @@
 
     .box h3 {
       background: #21262d;
+      color: #58a6ff;
       margin: 0;
       padding: 8px;
       border-bottom: 1px solid #30363d;
-      color: #58a6ff;
       text-align: center;
     }
 
     textarea {
+      flex-grow: 1;
       background: #161b22;
       color: #c9d1d9;
       border: none;
       padding: 10px;
       resize: none;
-      width: 100%;
-      height: 100%;
       outline: none;
       font-size: 14px;
     }
 
     iframe {
+      flex-grow: 1;
       width: 100%;
-      height: 100%;
       border: none;
-      background: #1a1f25; /* 🔥 dark background */
-      color-scheme: dark;
-    }
-
-    .output-header {
-      background: #21262d;
-      color: #58a6ff;
-      text-align: center;
-      padding: 8px;
-      font-weight: bold;
-      border-bottom: 1px solid #30363d;
+      background: #1a1f25;
     }
   </style>
 </head>
 <body>
-  <header>🧩 HTML + CSS Playground (Dark Mode)</header>
+  <header>🧩 4-Column Playground (Text → HTML → CSS → Output)</header>
 
-  <div class="top">
+  <div class="container">
+    <!-- Text Input -->
     <div class="box">
-      <h3>HTML Code</h3>
-      <textarea id="htmlCode" oninput="updateOutput()">
-
-      </textarea>
+      <h3>📝 Text Input</h3>
+      <textarea id="textInput" oninput="generateHTML()" placeholder="Write plain text here..."></textarea>
     </div>
 
+    <!-- Generated HTML -->
     <div class="box">
-      <h3>CSS Code</h3>
+      <h3>💻 HTML</h3>
+      <textarea id="htmlCode" oninput="updateOutput()"></textarea>
+    </div>
+
+    <!-- CSS -->
+    <div class="box">
+      <h3>🎨 CSS</h3>
       <textarea id="cssCode" oninput="updateOutput()">
+main {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 20px;
+}
 
+main div {
+  background: #60aea8;
+  color: #fff;
+  font-size: 2rem;
+  text-align: center;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.four {
+  background: #b8c6db;
+  color: #000;
+  grid-column: span 2;
+}
       </textarea>
     </div>
-  </div>
 
-  <div class="bottom">
-    <div class="output-header">🔍 Output Preview</div>
-    <iframe id="output"></iframe>
+    <!-- Output -->
+    <div class="box">
+      <h3>🔍 Output</h3>
+      <iframe id="output"></iframe>
+    </div>
   </div>
 
   <script>
+    function generateHTML() {
+      const text = document.getElementById("textInput").value.trim();
+      let html = "";
+      const lines = text.split("\n").filter(l => l.trim() !== "");
+
+      // 🧠 Markdown-like conversion
+      lines.forEach(line => {
+        if (line.startsWith("# ")) {
+          html += `<h1>${line.replace("# ", "")}</h1>\n`;
+        } else if (line.startsWith("## ")) {
+          html += `<h2>${line.replace("## ", "")}</h2>\n`;
+        } else if (line.startsWith("- ")) {
+          if (!html.endsWith("</ul>\n")) html += "<ul>\n";
+          html += `<li>${line.replace("- ", "")}</li>\n`;
+        } else {
+          if (html.endsWith("</ul>\n")) html = html.replace("</ul>\n", "");
+          html += `<p>${line}</p>\n`;
+        }
+      });
+      if (html.includes("<ul>\n") && !html.endsWith("</ul>\n")) html += "</ul>\n";
+
+      document.getElementById("htmlCode").value = html;
+      updateOutput();
+    }
+
     function updateOutput() {
       const html = document.getElementById("htmlCode").value;
       const css = "<style>" + document.getElementById("cssCode").value + "</style>";
-      document.getElementById("output").srcdoc = html + css;
+      document.getElementById("output").srcdoc = `<style>body{font-family:Arial;padding:10px;color:#fff;background:#1a1f25;}</style>${css}${html}`;
     }
-
-    updateOutput();
   </script>
 </body>
 </html>
