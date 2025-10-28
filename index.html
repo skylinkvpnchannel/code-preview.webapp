@@ -45,7 +45,6 @@
       border-radius: 4px;
       cursor: pointer;
     }
-
     button:hover, select:hover {
       background: #58a6ff;
       color: #000;
@@ -80,7 +79,7 @@
       text-align: center;
     }
 
-    .editor, textarea, iframe {
+    textarea, iframe, .editor {
       flex-grow: 1;
       background: #161b22;
       color: #c9d1d9;
@@ -97,15 +96,15 @@
       overflow-y: auto;
     }
 
-    .code-box {
-      background: #0f141a;
-      font-family: monospace;
-      white-space: pre-wrap;
-      overflow-y: auto;
-    }
-
     iframe {
       background: #1a1f25;
+    }
+
+    /* Split equally */
+    #htmlBox, #cssBox {
+      flex: 1;
+      height: 50%;
+      border-bottom: 1px solid #30363d;
     }
 
     footer {
@@ -151,11 +150,11 @@
       </div>
     </div>
 
-    <!-- HTML + CSS -->
+    <!-- HTML & CSS Columns -->
     <div class="box">
-      <h3>💻 HTML & 🎨 CSS</h3>
-      <pre id="htmlCode" class="code-box"></pre>
-      <textarea id="cssCode" placeholder="Write CSS here...">p {color: #58a6ff;}</textarea>
+      <h3>💻 HTML & 🎨 CSS (Editable)</h3>
+      <textarea id="htmlBox" placeholder="Your HTML code will appear here..."></textarea>
+      <textarea id="cssBox" placeholder="Write CSS here...">p {color: #58a6ff;}</textarea>
     </div>
 
     <!-- Output -->
@@ -168,20 +167,20 @@
   <footer>© 2025 Exit — Built with ❤️ | Hosted on GitHub Pages</footer>
 
   <script>
+    const editor = document.getElementById('editor');
+    const htmlBox = document.getElementById('htmlBox');
+    const cssBox = document.getElementById('cssBox');
+    const output = document.getElementById('output');
+
     function execCmd(command, value = null) {
       document.execCommand(command, false, value);
       updateAll();
     }
 
-    const editor = document.getElementById('editor');
-    const htmlCode = document.getElementById('htmlCode');
-    const cssCode = document.getElementById('cssCode');
-    const output = document.getElementById('output');
-
     function updateAll() {
       const html = editor.innerHTML;
-      const css = `<style>${cssCode.value}</style>`;
-      htmlCode.textContent = html;
+      htmlBox.value = html;
+      const css = `<style>${cssBox.value}</style>`;
       output.srcdoc = `
         <style>
           body {background:#1a1f25; color:white; font-family:Arial; padding:20px;}
@@ -191,8 +190,13 @@
       `;
     }
 
+    // Editable HTML and CSS
+    htmlBox.addEventListener('input', () => {
+      editor.innerHTML = htmlBox.value;
+      updateAll();
+    });
     editor.addEventListener('input', updateAll);
-    cssCode.addEventListener('input', updateAll);
+    cssBox.addEventListener('input', updateAll);
     updateAll();
   </script>
 </body>
