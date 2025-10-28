@@ -26,7 +26,6 @@
       border-bottom: 1px solid #30363d;
     }
 
-    /* Toolbar */
     .toolbar {
       background: #21262d;
       padding: 8px;
@@ -45,12 +44,12 @@
       border-radius: 4px;
       cursor: pointer;
     }
+
     button:hover, select:hover {
       background: #58a6ff;
       color: #000;
     }
 
-    /* Layout */
     .container {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -61,7 +60,7 @@
     @media (max-width: 900px) {
       .container {
         grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto;
+        grid-template-rows: auto auto auto auto;
       }
     }
 
@@ -77,6 +76,7 @@
       border-bottom: 1px solid #30363d;
       color: #58a6ff;
       text-align: center;
+      font-size: 16px;
     }
 
     textarea, iframe, .editor {
@@ -98,13 +98,35 @@
 
     iframe {
       background: #1a1f25;
+      min-height: 300px;
     }
 
-    /* Split equally */
     #htmlBox, #cssBox {
       flex: 1;
       height: 50%;
       border-bottom: 1px solid #30363d;
+    }
+
+    @media (max-width: 900px) {
+      #htmlBox, #cssBox {
+        height: 280px;
+        min-height: 250px;
+        margin: 10px 0;
+        font-size: 15px;
+      }
+
+      #output {
+        min-height: 450px;
+      }
+
+      textarea {
+        padding: 15px;
+      }
+
+      .box h3 {
+        font-size: 18px;
+        padding: 12px;
+      }
     }
 
     footer {
@@ -120,7 +142,6 @@
 <body>
   <header>🧩 HTML Playground Tool by Exit</header>
 
-  <!-- Toolbar -->
   <div class="toolbar">
     <button onclick="execCmd('bold')"><b>B</b></button>
     <button onclick="execCmd('italic')"><i>I</i></button>
@@ -139,25 +160,23 @@
     <button onclick="updateAll()">🔄 Refresh</button>
   </div>
 
-  <!-- Main -->
   <div class="container">
-    <!-- Editor -->
     <div class="box">
-      <h3>📝 Editor (Use Toolbar)</h3>
+      <h3>📝 Editor</h3>
       <div id="editor" class="editor" contenteditable="true">
         <h2>Welcome to Exit’s HTML Playground 👋</h2>
-        <p>Type something here and style it with the toolbar.</p>
+        <p>Type text and use toolbar to style it.</p>
       </div>
     </div>
 
-    <!-- HTML & CSS Columns -->
     <div class="box">
-      <h3>💻 HTML & 🎨 CSS (Editable)</h3>
-      <textarea id="htmlBox" placeholder="Your HTML code will appear here..."></textarea>
-      <textarea id="cssBox" placeholder="Write CSS here...">p {color: #58a6ff;}</textarea>
+      <h3>💻 HTML</h3>
+      <textarea id="htmlBox" placeholder="Edit HTML code here..."></textarea>
+
+      <h3>🎨 CSS</h3>
+      <textarea id="cssBox" placeholder="Write CSS here...">p { color: #58a6ff; }</textarea>
     </div>
 
-    <!-- Output -->
     <div class="box">
       <h3>🔍 Output</h3>
       <iframe id="output"></iframe>
@@ -190,7 +209,6 @@
       `;
     }
 
-    // Editable HTML and CSS
     htmlBox.addEventListener('input', () => {
       editor.innerHTML = htmlBox.value;
       updateAll();
